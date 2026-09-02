@@ -39,6 +39,8 @@ Exchange API keys are **not** stored in environment variables. You add exchange 
 
 ## Dependencies for OpenTrader
 
+### Deployment Dependencies
+
 - A Railway account with a starter plan or above (the container needs ~0.5 GB RAM).
 - A Railway volume is attached automatically at `/app/data` for the SQLite database.
 - Optional: exchange API keys with spot-trading permission for the exchange you configure in the UI.
