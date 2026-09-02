@@ -1,0 +1,22 @@
+{
+  "ADMIN_PASSWORD": {
+    "value": "",
+    "description": "REQUIRED. Password to log into the OpenTrader UI (email: onboarding@opentrader.pro). Choose a strong password — the UI controls trading and exchange keys."
+  },
+  "PORT": {
+    "value": "4000",
+    "description": "HTTP port for the OpenTrader server. Must stay 4000 — it matches the Railway domain target port configured in this template."
+  },
+  "HOST": {
+    "value": "0.0.0.0",
+    "description": "Bind address. Must stay 0.0.0.0 so Railway's proxy can reach the server."
+  },
+  "DATABASE_URL": {
+    "value": "file:/app/data/opentrader.db",
+    "description": "SQLite database location on the persistent /app/data volume. Change only if you know what you are doing."
+  },
+  "CUSTOM_STRATEGIES_PATH": {
+    "value": "",
+    "description": "Optional absolute path to a directory of custom strategy files. Place files on the /app/data volume so they persist across deploys. Leave empty to use built-in strategies only."
+  }
+}
