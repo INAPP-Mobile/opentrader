@@ -1,3 +1,28 @@
-.git
-*.log
-opentrader_data/
+.idea
+node_modules
+.DS_Store
+playground
+.env
+.env.production
+config.json5
+exchanges.json5
+.vercel
+
+# Release build for publishing on NPM
+/release
+
+# Prisma SQLite database files
+dev.db
+dev.db-journal
+
+# pnpm prune
+/out
+
+/k8s
+
+# TS
+tsconfig.tsbuildinfo
+
+# moon
+.moon/cache
+.moon/docker
