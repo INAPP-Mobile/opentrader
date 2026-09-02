@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101828"/>
+      <stop offset="1" stop-color="#1d2939"/>
+    </linearGradient>
+    <linearGradient id="up" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#12b76a"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="down" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f97066"/>
+      <stop offset="1" stop-color="#f04438"/>
+    </linearGradient>
+  </defs>
+
+  <!-- rounded background -->
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#bg)"/>
+
+  <!-- subtle grid lines (grid strategy motif) -->
+  <g stroke="#344054" stroke-width="2" opacity="0.45">
+    <line x1="28" y1="88" x2="228" y2="88"/>
+    <line x1="28" y1="128" x2="228" y2="128"/>
+    <line x1="28" y1="168" x2="228" y2="168"/>
+    <line x1="88" y1="28" x2="88" y2="228"/>
+    <line x1="168" y1="28" x2="168" y2="228"/>
+  </g>
+
+  <!-- candlesticks (up = green) -->
+  <g>
+    <line x1="64" y1="96" x2="64" y2="200" stroke="url(#up)" stroke-width="8" stroke-linecap="round"/>
+    <rect x="52" y="120" width="24" height="56" rx="6" fill="url(#up)"/>
+
+    <line x1="128" y1="56" x2="128" y2="176" stroke="url(#up)" stroke-width="8" stroke-linecap="round"/>
+    <rect x="116" y="84" width="24" height="64" rx="6" fill="url(#up)"/>
+
+    <line x1="192" y1="72" x2="192" y2="192" stroke="url(#down)" stroke-width="8" stroke-linecap="round"/>
+    <rect x="180" y="96" width="24" height="64" rx="6" fill="url(#down)"/>
+  </g>
+
+  <!-- open ring (open-source motif) -->
+  <circle cx="128" cy="128" r="104" fill="none" stroke="#84ccff" stroke-width="8"
+          stroke-linecap="round" stroke-dasharray="330 90" opacity="0.85" transform="rotate(-45 128 128)"/>
+</svg>
