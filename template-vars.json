@@ -1,32 +1,14 @@
 {
   "ADMIN_PASSWORD": {
     "name": "Admin Password",
-    "defaultValue": "",
-    "description": "REQUIRED. Password to log into the OpenTrader UI (email: onboarding@opentrader.pro). Choose a strong password — the UI controls trading and exchange keys.",
+    "defaultValue": "${{secret(16)}}",
+    "description": "REQUIRED. Password to log into the OpenTrader UI (email: onboarding@opentrader.pro). Auto-generated per deployment via ${{secret(16)}} — copy the generated value from the service's Variables tab after deploy. Change it to your own to keep logins stable across redeploys.",
     "isOptional": false
-  },
-  "PORT": {
-    "name": "Server Port",
-    "defaultValue": "4000",
-    "description": "HTTP port for the OpenTrader server. Must stay 4000 — it matches the Railway domain target port configured in this template.",
-    "isOptional": true
-  },
-  "HOST": {
-    "name": "Bind Host",
-    "defaultValue": "0.0.0.0",
-    "description": "Bind address. Must stay 0.0.0.0 so Railway's proxy can reach the server.",
-    "isOptional": true
   },
   "DATABASE_URL": {
     "name": "Database URL",
-    "defaultValue": "file:/app/data/opentrader.db",
-    "description": "SQLite database location on the persistent /app/data volume. Change only if you know what you are doing.",
-    "isOptional": true
-  },
-  "CUSTOM_STRATEGIES_PATH": {
-    "name": "Custom Strategies Path",
-    "defaultValue": "/app/data/strategies",
-    "description": "Optional absolute path to a directory of custom strategy files. Place files on the /app/data volume so they persist across deploys. Leave empty to use built-in strategies only.",
-    "isOptional": true
+    "defaultValue": "file:${{RAILWAY_VOLUME_MOUNT_PATH}}/opentrader.db",
+    "description": "SQLite database location on the persistent /app/data volume, via the RAILWAY_VOLUME_MOUNT_PATH reference. Change only if you know what you are doing.",
+    "isOptional": false
   }
 }

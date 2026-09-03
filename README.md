@@ -15,12 +15,10 @@ The template runs a single service that bundles the trading engine, the tRPC API
 
 Key environment variables:
 
-- `ADMIN_PASSWORD` (required) — UI login password
-- `PORT` — server port (defaults to 4000, bound to `0.0.0.0`)
-- `DATABASE_URL` — SQLite file path on the persistent volume
-- `CUSTOM_STRATEGIES_PATH` — optional directory for custom strategy files
+- `ADMIN_PASSWORD` (required) — UI login password. Auto-generated per deployment via `${{secret(16)}}`; log in with email `onboarding@opentrader.pro` and this generated value (visible in the service's Variables tab).
+- `DATABASE_URL` — SQLite file path, wired to the persistent volume via `file:${{RAILWAY_VOLUME_MOUNT_PATH}}/opentrader.db`
 
-Exchange API keys are **not** stored in environment variables. You add exchange accounts (OKX, BYBIT, BITGET, BINANCE, KRAKEN, COINBASE, GATEIO, and more via CCXT) inside the web UI after login, and they are stored encrypted in the SQLite database on your own volume.
+`PORT` (4000) and `HOST` (0.0.0.0) are pinned in the image — no configuration needed. Exchange API keys are **not** stored in environment variables. You add exchange accounts (OKX, BYBIT, BITGET, BINANCE, KRAKEN, COINBASE, GATEIO, and more via CCXT) inside the web UI after login, and they are stored encrypted in the SQLite database on your own volume.
 
 ## Why Deploy
 
