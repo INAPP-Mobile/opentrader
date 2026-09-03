@@ -64,6 +64,13 @@ COPY --from=build /app/node_modules ./node_modules
 RUN sed -i 's|"http://localhost:8000"|window.location.origin|g' apps/cli/frontend/assets/*.js
 
 # Copy Prisma schema, migrations, and seed script
+# Upstream root route ("/") redirects to the bot dashboard, whose bot.list
+# useSuspenseQuery fires BEFORE login and renders a raw "Error occurred:
+# UNAUTHORIZED" boundary on first visit (no localStorage password yet). Land
+# first-time visitors on the login page instead; after login the UI routes to
+# the dashboard itself.
+RUN sed -i 's|c({to:ii("bot")})|c({to:ii("login")})|g' apps/cli/frontend/assets/*.js
+
 COPY --from=build /app/packages/prisma/src/schema.prisma ./packages/prisma/src/schema.prisma
 COPY --from=build /app/packages/prisma/src/migrations ./packages/prisma/src/migrations
 COPY --from=build /app/packages/prisma/seed.mjs ./packages/prisma/seed.mjs
