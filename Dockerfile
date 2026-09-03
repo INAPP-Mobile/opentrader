@@ -57,6 +57,12 @@ WORKDIR /app
 COPY --from=build /app/apps/cli ./apps/cli
 COPY --from=build /app/node_modules ./node_modules
 
+# Upstream frontend ships a hardcoded default backendURL of http://localhost:8000
+# (dev convenience). On a remote host the UI shows "backend is offline" until the
+# user hand-edits Settings → backendURL. Default it to the serving origin instead:
+# the standalone server serves both the UI and /api/* on the same port.
+RUN sed -i 's|"http://localhost:8000"|window.location.origin|g' apps/cli/frontend/assets/*.js
+
 # Copy Prisma schema, migrations, and seed script
 COPY --from=build /app/packages/prisma/src/schema.prisma ./packages/prisma/src/schema.prisma
 COPY --from=build /app/packages/prisma/src/migrations ./packages/prisma/src/migrations
