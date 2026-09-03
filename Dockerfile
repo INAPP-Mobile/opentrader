@@ -72,5 +72,7 @@ EXPOSE 4000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=5 \
   CMD wget -qO- "http://127.0.0.1:${PORT}/api/trpc/public.healhcheck?input=%7B%7D" | grep -q '"status":"ok"' || exit 1
 
-# Run DB migrations + seed, then start (upstream bin/docker-entry.sh behavior)
-CMD ["sh", "-c", "mkdir -p /app/data && /app/node_modules/prisma/build/index.js migrate deploy --schema /app/packages/prisma/src/schema.prisma && node /app/packages/prisma/seed.mjs && cd /app/apps/cli && exec node dist/standalone.mjs"]
+# Run DB migrations + seed, then start (upstream bin/docker-entry.sh behavior).
+# PORT is pinned here: Railway injects PORT=8080 on service vars-less deploys,
+# which breaks the domain targeting 4000 (verified live 502). Image default wins.
+CMD ["sh", "-c", "mkdir -p /app/data && /app/node_modules/prisma/build/index.js migrate deploy --schema /app/packages/prisma/src/schema.prisma && node /app/packages/prisma/seed.mjs && cd /app/apps/cli && export PORT=4000 && exec node dist/standalone.mjs"]
