@@ -3,7 +3,7 @@
 # Multi-stage build via moonrepo toolchain (mirrors upstream Dockerfile flow).
 
 #### BASE
-FROM node:22.12-alpine3.20 AS base
+FROM node:24.1-alpine3.20 AS base
 
 ENV MOON_TOOLCHAIN_FORCE_GLOBALS=true
 
@@ -48,7 +48,7 @@ RUN moon run cli:build && sed -i "s|'zod/v3'|'zod'|g" apps/cli/dist/*.mjs
 RUN moon docker prune
 
 #### RUNNER
-FROM node:22.12-alpine3.20 AS runner
+FROM node:24.1-alpine3.20 AS runner
 WORKDIR /app
 
 # Runs as root: Railway volumes mount root-owned and prisma must be able to
